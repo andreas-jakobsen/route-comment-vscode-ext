@@ -1,0 +1,149 @@
+{
+  "name": "vscode-route-comment",
+  "displayName": "Route Comment",
+  "description": "Insert a route comment at the top of the file and open the route directly in your browser. Optimized for Next.js App Router.",
+  "version": "0.1.0",
+  "publisher": "andreasjakobsen",
+  "author": "Andreas Jakobsen",
+  "license": "MIT",
+  "homepage": "https://github.com/yourname/vscode-route-comment#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourname/vscode-route-comment.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourname/vscode-route-comment/issues"
+  },
+  "icon": "icon.png",
+  "galleryBanner": {
+    "color": "#0f172a",
+    "theme": "dark"
+  },
+  "keywords": [
+    "Next.js",
+    "App Router",
+    "routes",
+    "CodeLens",
+    "status bar",
+    "comment",
+    "productivity",
+    "open in browser",
+    "typescript",
+    "javascript",
+    "developer tools"
+  ],
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "extensionKind": [
+    "workspace"
+  ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    }
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:routeComment.insert",
+    "onCommand:routeComment.copy",
+    "onCommand:routeComment.open",
+    "onLanguage:typescript",
+    "onLanguage:javascript",
+    "onLanguage:typescriptreact",
+    "onLanguage:javascriptreact"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "routeComment.insert",
+        "title": "Route Comment: Insert or Update"
+      },
+      {
+        "command": "routeComment.copy",
+        "title": "Route Comment: Copy Route"
+      },
+      {
+        "command": "routeComment.open",
+        "title": "Route Comment: Open in Browser"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "routeComment.insert",
+          "group": "navigation@100",
+          "when": "resourceExtname =~ /\\.(ts|tsx|js|jsx|mdx)$/"
+        },
+        {
+          "command": "routeComment.open",
+          "group": "navigation@101",
+          "when": "resourceExtname =~ /\\.(ts|tsx|js|jsx|mdx)$/"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "routeComment.copy",
+          "group": "navigation",
+          "when": "resourceExtname =~ /\\.(ts|tsx|js|jsx|mdx)$/"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Route Comment",
+      "properties": {
+        "routeComment.includeAppSegment": {
+          "type": "boolean",
+          "default": true,
+          "description": "Include 'app' segment in the displayed route (e.g. // /app/api/... ). Turn off for canonical Next.js URLs (// /api/...)."
+        },
+        "routeComment.commentStyle": {
+          "type": "string",
+          "enum": [
+            "auto",
+            "slash",
+            "hash",
+            "block"
+          ],
+          "default": "slash",
+          "description": "How to format the comment. 'slash' -> //, 'hash' -> #, 'block' -> /* */. 'auto' tries to guess."
+        },
+        "routeComment.openBaseUrl": {
+          "type": "string",
+          "default": "http://localhost:3000",
+          "description": "Base URL used by 'Open in Browser'."
+        },
+        "routeComment.statusBar": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show status bar action to insert/update the route comment."
+        }
+      }
+    },
+    "keybindings": [
+      {
+        "command": "routeComment.insert",
+        "key": "ctrl+alt+r",
+        "mac": "cmd+alt+r",
+        "when": "editorTextFocus"
+      }
+    ]
+  },
+  "scripts": {
+    "build": "tsc -p ./",
+    "watch": "tsc -w -p ./",
+    "vscode:prepublish": "npm run build",
+    "package": "vsce package",
+    "publish": "vsce publish",
+    "compile": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^18.19.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.6.3",
+    "vsce": "^2.15.0"
+  }
+}
