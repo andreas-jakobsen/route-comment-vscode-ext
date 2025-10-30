@@ -48,7 +48,7 @@ Copy Route | Open in Browser | Refresh Route
 
 ### 1. Install
 
-Search for **Route Comment** in the [VS Code Marketplace](https://awatingapproval.vscode.com)
+Search for **Route Comment** in the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=AndreasJakobsen.vscode-route-comment)
 or run:
 
 ```bash
